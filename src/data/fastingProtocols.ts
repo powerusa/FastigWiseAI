@@ -1,0 +1,68 @@
+import { FastingProtocol } from '../types';
+
+export const fastingProtocols: FastingProtocol[] = [
+  {
+    id: '16-8',
+    name: '16:8 Intermittent Fasting',
+    description: 'Fast for 16 hours, eat during an 8-hour window. A popular and sustainable approach.',
+    fastHours: 16,
+    eatHours: 8,
+    recommended: true,
+  },
+  {
+    id: '18-6',
+    name: '18:6 Intermittent Fasting',
+    description: 'Fast for 18 hours, eat during a 6-hour window. More advanced than 16:8.',
+    fastHours: 18,
+    eatHours: 6,
+    recommended: false,
+  },
+  {
+    id: '20-4',
+    name: '20:4 (Warrior Diet)',
+    description: 'Fast for 20 hours, eat during a 4-hour window. Challenging but effective.',
+    fastHours: 20,
+    eatHours: 4,
+    recommended: false,
+  },
+  {
+    id: '24-hour',
+    name: '24 Hour Fast',
+    description: 'Complete 24-hour fast from dinner to dinner. Do 1-2 times per week.',
+    fastHours: 24,
+    eatHours: 24,
+    recommended: false,
+  },
+  {
+    id: '36-hour',
+    name: '36 Hour Fast',
+    description: 'Fast for a full day plus overnight periods. Dinner to breakfast two days later.',
+    fastHours: 36,
+    eatHours: 12,
+    recommended: false,
+  },
+  {
+    id: '48-hour',
+    name: '48 Hour Fast',
+    description: 'Two-day fast. Advanced method that may enhance autophagy and fat loss.',
+    fastHours: 48,
+    eatHours: 24,
+    recommended: false,
+  },
+  {
+    id: '72-hour',
+    name: '72 Hour Fast',
+    description: 'Three-day fast. Significant autophagy and cellular renewal. Advanced only.',
+    fastHours: 72,
+    eatHours: 24,
+    recommended: false,
+  },
+  {
+    id: 'custom',
+    name: 'Custom Fast',
+    description: 'Set your own fasting and eating windows.',
+    fastHours: 16,
+    eatHours: 8,
+    recommended: false,
+  },
+];
