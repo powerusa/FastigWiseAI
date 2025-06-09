@@ -105,7 +105,7 @@ const SafetyDisclaimerScreen: React.FC<{onComplete: () => void}> = ({ onComplete
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('timer');
   const [showMainApp, setShowMainApp] = useState<boolean>(false);
-  const { userPreferences, updateUserPreferences } = useFastingStore();
+  const { userPreferences } = useFastingStore();
   const { isNative, isIOS } = useCapacitor();
   
   // No need to track initialization with simplified disclaimer logic
@@ -120,16 +120,10 @@ const App: React.FC = () => {
       document.body.classList.add('ios-native');
     }
 
-    // CRITICAL: For App Store compliance, the disclaimer must appear on every app launch on native platforms
-    if (isNative) {
-      console.log('Native platform detected: Forcing disclaimer to show');
-      // IMPORTANT: DO NOT call updateUserPreferences here, just set the local state
-      // This prevents conflict between the forced reset and user acknowledgment
-      setShowMainApp(false);
-    } else {
-      // On web, check stored preference
-      setShowMainApp(userPreferences.safetyDisclaimerAcknowledged);
-    }
+    // Check if user has previously acknowledged the disclaimer on any platform
+    // Only show disclaimer once on first app installation
+    console.log('Checking safety disclaimer status:', userPreferences.safetyDisclaimerAcknowledged);
+    setShowMainApp(userPreferences.safetyDisclaimerAcknowledged);
     
     // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [isNative, isIOS]);  // Only run on mount and when platform changes
