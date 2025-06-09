@@ -8,6 +8,7 @@ import SafetyHub from './components/education/SafetyHub';
 import { useFastingStore } from './store/fastingStore';
 import { useCapacitor } from './hooks/useCapacitor';
 import { Timer, MessageSquare, BarChart3, Book, Apple, AlertTriangle, Check } from 'lucide-react';
+import boltBadge from './assets/images/built-on-bolt.svg';
 
 // Safety Disclaimer Screen Component
 const SafetyDisclaimerScreen: React.FC<{onComplete: () => void}> = ({ onComplete }) => {
@@ -171,6 +172,11 @@ const App: React.FC = () => {
     <>
       <Layout>
         <div className="mb-6">
+          {/* Built on Bolt Badge */}
+          <div className="fixed left-4 bottom-20 z-40">
+            <img src={boltBadge} alt="Built on Bolt" className="h-6 opacity-70 dark:invert" />
+          </div>
+          
           {/* Bottom tab navigation */}
           <div className="fixed bottom-0 left-0 right-0 bg-gray-900 border-t border-gray-800 pb-safe z-50 pt-3 pb-6">
             <div className="flex justify-around max-w-md mx-auto">

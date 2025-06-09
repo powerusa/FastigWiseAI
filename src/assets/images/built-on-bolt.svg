@@ -1,0 +1,12 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<svg width="300" height="60" xmlns="http://www.w3.org/2000/svg">
+  <style>
+    text {
+      font-family: Arial, sans-serif;
+      font-weight: 900;
+      font-size: 40px;
+      fill: #000;
+    }
+  </style>
+  <text x="10" y="45">BUILT ON BOLT</text>
+</svg>
