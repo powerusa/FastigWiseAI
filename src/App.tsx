@@ -174,7 +174,7 @@ const App: React.FC = () => {
         <div className="mb-6">
           {/* Built on Bolt Badge */}
           <div className="fixed left-4 bottom-28 z-40">
-            <img src={boltBadge} alt="Built on Bolt" className="h-6 opacity-70 dark:invert" />
+            <img src={boltBadge} alt="Built on Bolt" className="h-6 opacity-90" />
           </div>
           
           {/* Bottom tab navigation */}
