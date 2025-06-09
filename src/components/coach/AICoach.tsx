@@ -70,7 +70,7 @@ const AICoach: React.FC = () => {
   };
   
   return (
-    <div className="max-w-md mx-auto">
+    <div className="max-w-md mx-auto mt-6"> {/* Added top margin */}
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md flex flex-col h-[550px]">
         {/* Chat header */}
         <div className="p-4 border-b border-gray-200 dark:border-gray-700 flex items-center">

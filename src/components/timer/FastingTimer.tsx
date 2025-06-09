@@ -78,7 +78,7 @@ const FastingTimer: React.FC = () => {
   const selectedProtocol = protocols.find(p => p.id === selectedProtocolId);
   
   return (
-    <div className="w-full max-w-sm mx-auto px-4 sm:px-0">
+    <div className="w-full max-w-sm mx-auto px-4 sm:px-0 mt-8"> {/* Added top margin to lower the window */}
       {!currentFast ? (
         <div className="bg-gray-800 rounded-lg shadow-lg p-4 sm:p-6 mb-6">
           <h2 className="text-xl font-semibold mb-4 text-center text-gray-100">Start a New Fast</h2>
