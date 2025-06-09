@@ -79,6 +79,14 @@ const SafetyHub: React.FC = () => {
   return (
     <div className="max-w-md mx-auto">
       <div className="bg-white dark:bg-gray-800 rounded-lg shadow-md p-6 mb-6">
+        <div className="border-l-4 border-red-500 pl-4 py-4 bg-red-50 dark:bg-red-900/20 mb-6">
+          <h3 className="font-semibold text-red-600 dark:text-red-400 mb-1">Medical Disclaimer</h3>
+          <p className="text-gray-800 dark:text-gray-200 font-medium">
+            This app does not provide medical advice. Consult a healthcare professional before starting any fasting regimen. 
+            Not for use by children, pregnant or breastfeeding individuals, or those with medical conditions.
+          </p>
+        </div>
+
         <h2 className="text-xl font-semibold mb-2">Fasting Safety Guide</h2>
         <p className="text-gray-600 dark:text-gray-400 mb-6">
           Important information to ensure a safe and effective fasting experience.

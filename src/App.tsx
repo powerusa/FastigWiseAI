@@ -5,12 +5,14 @@ import AICoach from './components/coach/AICoach';
 import ProgressTracker from './components/progress/ProgressTracker';
 import MealPlanner from './components/meals/MealPlanner';
 import SafetyHub from './components/education/SafetyHub';
+import SafetyDisclaimerModal from './components/modals/SafetyDisclaimerModal';
 import { useFastingStore } from './store/fastingStore';
 import { useCapacitor } from './hooks/useCapacitor';
 import { Timer, MessageSquare, BarChart3, Book, Apple } from 'lucide-react';
 
 const App: React.FC = () => {
   const [activeTab, setActiveTab] = useState<string>('timer');
+  const [showSafetyModal, setShowSafetyModal] = useState<boolean>(false);
   const { userPreferences } = useFastingStore();
   const { isNative, isIOS } = useCapacitor();
 
@@ -22,7 +24,12 @@ const App: React.FC = () => {
     if (isNative && isIOS) {
       document.body.classList.add('ios-native');
     }
-  }, [isNative, isIOS]);
+    
+    // Check if user has acknowledged the safety disclaimer
+    if (!userPreferences.safetyDisclaimerAcknowledged) {
+      setShowSafetyModal(true);
+    }
+  }, [isNative, isIOS, userPreferences.safetyDisclaimerAcknowledged]);
 
   const renderActiveComponent = () => {
     switch (activeTab) {
@@ -42,50 +49,55 @@ const App: React.FC = () => {
   };
 
   return (
-    <Layout>
-      <div className="mb-6">
-        <nav className={`fixed top-0 left-0 right-0 z-50 bg-gray-900 py-2 px-1 ${isIOS && isNative ? 'pt-12' : ''}`}>
-          <div className="flex justify-center w-full mx-auto">
-            <div className="flex w-full max-w-sm p-1 bg-gray-800 rounded-lg">
-              <TabButton
-                icon={<Timer size={16} />}
-                label="Timer"
-                isActive={activeTab === 'timer'}
-                onClick={() => setActiveTab('timer')}
-              />
-              <TabButton
-                icon={<MessageSquare size={16} />}
-                label="Coach"
-                isActive={activeTab === 'coach'}
-                onClick={() => setActiveTab('coach')}
-              />
-              <TabButton
-                icon={<BarChart3 size={16} />}
-                label="Progress"
-                isActive={activeTab === 'progress'}
-                onClick={() => setActiveTab('progress')}
-              />
-              <TabButton
-                icon={<Apple size={16} />}
-                label="Meals"
-                isActive={activeTab === 'meals'}
-                onClick={() => setActiveTab('meals')}
-              />
-              <TabButton
-                icon={<Book size={16} />}
-                label="Learn"
-                isActive={activeTab === 'learn'}
-                onClick={() => setActiveTab('learn')}
-              />
+    <>
+      {showSafetyModal && (
+        <SafetyDisclaimerModal onClose={() => setShowSafetyModal(false)} />
+      )}
+      <Layout>
+        <div className="mb-6">
+          <nav className={`fixed top-0 left-0 right-0 z-50 bg-gray-900 py-2 px-1 ${isIOS && isNative ? 'pt-12' : ''}`}>
+            <div className="flex justify-center w-full mx-auto">
+              <div className="flex w-full max-w-sm p-1 bg-gray-800 rounded-lg">
+                <TabButton
+                  icon={<Timer size={16} />}
+                  label="Timer"
+                  isActive={activeTab === 'timer'}
+                  onClick={() => setActiveTab('timer')}
+                />
+                <TabButton
+                  icon={<MessageSquare size={16} />}
+                  label="Coach"
+                  isActive={activeTab === 'coach'}
+                  onClick={() => setActiveTab('coach')}
+                />
+                <TabButton
+                  icon={<BarChart3 size={16} />}
+                  label="Progress"
+                  isActive={activeTab === 'progress'}
+                  onClick={() => setActiveTab('progress')}
+                />
+                <TabButton
+                  icon={<Apple size={16} />}
+                  label="Meals"
+                  isActive={activeTab === 'meals'}
+                  onClick={() => setActiveTab('meals')}
+                />
+                <TabButton
+                  icon={<Book size={16} />}
+                  label="Learn"
+                  isActive={activeTab === 'learn'}
+                  onClick={() => setActiveTab('learn')}
+                />
+              </div>
             </div>
+          </nav>
+          
+          <div className={`${isIOS && isNative ? 'mt-20' : 'mt-16'}`}>
+            {renderActiveComponent()}
           </div>
-        </nav>
-        
-        <div className={`${isIOS && isNative ? 'mt-20' : 'mt-16'}`}>
-          {renderActiveComponent()}
         </div>
-      </div>
-    </Layout>
+      </Layout>
+    </>
   );
 };
 

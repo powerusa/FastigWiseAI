@@ -2,7 +2,6 @@ import { create } from 'zustand';
 import { persist } from 'zustand/middleware';
 import { FastingProtocol, Fast, UserStats, ChatMessage, ProgressEntry, UserPreferences } from '../types';
 import { fastingProtocols } from '../data/fastingProtocols';
-import { formatDistanceStrict } from 'date-fns';
 import { v4 as uuidv4 } from '../utils/uuid';
 
 interface FastingState {
@@ -40,6 +39,8 @@ export const useFastingStore = create<FastingState>()(
         longestFast: 0,
         currentStreak: 0,
         completionRate: 0,
+        experienceLevel: 'beginner',
+        motivationStyle: 'scientific',
       },
       chatHistory: [],
       progressEntries: [],
@@ -47,6 +48,7 @@ export const useFastingStore = create<FastingState>()(
         theme: 'dark',
         defaultProtocol: '16-8',
         notifications: true,
+        safetyDisclaimerAcknowledged: false,
         dietary: {
           vegetarian: false,
           vegan: false,
@@ -113,14 +115,15 @@ export const useFastingStore = create<FastingState>()(
         const { currentFast, pastFasts, userStats } = get();
         if (!currentFast) return;
         
+        const endTime = Date.now();
         const endedFast: Fast = {
           ...currentFast,
-          endTime: Date.now(),
+          endTime,
           completed,
         };
         
         // Calculate fasting duration in hours
-        const fastDuration = ((endedFast.endTime - endedFast.startTime - endedFast.pausedTime) / (60 * 60 * 1000));
+        const fastDuration = ((endTime - endedFast.startTime - endedFast.pausedTime) / (60 * 60 * 1000));
         
         // Update stats
         const totalFasts = userStats.totalFasts + 1;
@@ -139,6 +142,8 @@ export const useFastingStore = create<FastingState>()(
             longestFast,
             currentStreak,
             completionRate,
+            experienceLevel: userStats.experienceLevel,
+            motivationStyle: userStats.motivationStyle,
           },
         });
       },

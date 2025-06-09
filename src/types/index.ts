@@ -83,6 +83,7 @@ export interface UserPreferences {
   theme: 'light' | 'dark';
   defaultProtocol: string;
   notifications: boolean;
+  safetyDisclaimerAcknowledged: boolean;
   dietary: {
     vegetarian: boolean;
     vegan: boolean;
